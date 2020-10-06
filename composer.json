@@ -1,0 +1,42 @@
+{
+    "name": "statikbe/craft-sentry",
+    "description": "Sentry.io integration for Craft CMS",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft sentry"
+    ],
+    "support": {
+        "docs": "https://github.com/statikbe/craft-sentry/blob/master/README.md",
+        "issues": "https://github.com/statikbe/craft-sentry/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Statik.be",
+            "homepage": "https://www.statik.be"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0",
+        "sentry/sdk": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "statikbe\\sentry\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Sentry",
+        "handle": "craft-sentry",
+        "developer": "Statik.be",
+        "developerUrl": "https://www.statik.be",
+        "documentationUrl": "https://github.com/statikbe/craft-sentry/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/statikbe/craft-sentry/master/CHANGELOG.md",
+        "class": "statikbe\\sentry\\Sentry"
+    }
+}
