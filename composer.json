@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "keywords": [
         "craft",
+        "sentry",
         "cms",
         "craftcms",
         "craft-plugin",

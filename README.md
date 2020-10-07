@@ -4,16 +4,10 @@ Sentry.io integration for Craft CMS
 
 ## Installation
 
-To install the plugin, follow these instructions.
-
-1. Open your terminal and go to your Craft project:
+To install the plugin, follow these instructions in your terminal.
 
         cd /path/to/project
-
-2. Then tell Composer to load the plugin:
-
         composer require statikbe/craft-sentry
-
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Craft Sentry.
+        ./craft plugin/install craft-sentry
 
 Brought to you by [Statik.be](https://www.statik.be)
