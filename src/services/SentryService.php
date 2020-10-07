@@ -2,6 +2,7 @@
 
 namespace statikbe\sentry\services;
 
+use Craft;
 use craft\base\Component;
 use Sentry as SentrySdk;
 use statikbe\sentry\Sentry;
@@ -19,7 +20,6 @@ class SentryService extends Component
         }
 
         $statusCode = $exception->statusCode ?? null;
-
         if (in_array($statusCode, $settings->excludedCodes)) {
             Craft::info('Exception status code excluded from being reported to Sentry.', $plugin->handle);
             return;
