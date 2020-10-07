@@ -69,24 +69,24 @@ class Sentry extends Plugin
         );
     }
 
+    // Static Methods
+    // =========================================================================
     public static function handleException($exception)
     {
-        Sentry::$plugin->handle($exception);
+        Sentry::$plugin->sentry->handleException($exception);
     }
 
     // Protected Methods
     // =========================================================================
-    /**
-     * @inheritdoc
-     */
     protected function createSettingsModel()
     {
         return new Settings();
     }
 
+    // Private Methods
+    // =========================================================================
     private function setupSentry()
     {
-
         $app = Craft::$app;
         $info = $app->getInfo();
         $settings = $this->getSettings();
@@ -98,12 +98,11 @@ class Sentry extends Plugin
             ]
         );
 
-
         $user = $app->getUser()->getIdentity();
         SentrySdk\configureScope(function (Scope $scope) use ($app, $info, $settings, $user) {
             if ($user && !$settings->anonymous) {
                 $scope->setUser([
-                    'ID' => $user->id,
+                    'id' => $user->email,
                     'Username' => $user->username,
                     'Email' => $user->email,
                     'Admin' => $user->admin ? 'Yes' : 'No',
@@ -116,7 +115,7 @@ class Sentry extends Plugin
             $scope->setExtra('App Version', $info->version);
             $scope->setExtra('App Version (schema)', $info->schemaVersion);
             $scope->setExtra('PHP Version', phpversion());
-            $scope->setExtra('URL', $app->getRequest()->getUrl());
+            $scope->setExtra('URL', $app->getRequest()->isSiteRequest ? $app->getRequest()->getUrl() : "Console");
         });
     }
 }
