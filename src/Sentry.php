@@ -46,14 +46,6 @@ class Sentry extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        Event::on(
-            ErrorHandler::className(),
-            ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
-            function (ExceptionEvent $event) {
-                $this->sentry->handleException($event->exception);
-            }
-        );
-
         $this->components = [
             'sentry' => SentryService::class
         ];
