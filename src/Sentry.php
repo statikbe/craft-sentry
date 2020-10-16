@@ -49,14 +49,17 @@ class Sentry extends Plugin
         $this->components = [
             'sentry' => SentryService::class
         ];
-
-        $this->setupSentry();
+        if($this->getSettings()->enabled) {
+            $this->setupSentry();
+        }
 
         Event::on(
             ErrorHandler::className(),
             ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
             function (ExceptionEvent $event) {
-                $this->sentry->handleException($event->exception);
+                if($this->getSettings()->enabled) {
+                    $this->sentry->handleException($event->exception);
+                }
             }
         );
     }
