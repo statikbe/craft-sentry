@@ -49,9 +49,6 @@ class Sentry extends Plugin
         $this->components = [
             'sentry' => SentryService::class
         ];
-        if($this->getSettings()->enabled) {
-            $this->setupSentry();
-        }
 
         Event::on(
             ErrorHandler::className(),
@@ -78,39 +75,4 @@ class Sentry extends Plugin
         return new Settings();
     }
 
-    // Private Methods
-    // =========================================================================
-    private function setupSentry()
-    {
-        $app = Craft::$app;
-        $info = $app->getInfo();
-        $settings = $this->getSettings();
-
-        SentrySdk\init([
-                'dsn' => $settings->clientDsn,
-                'environment' => CRAFT_ENVIRONMENT,
-                'release' => $settings->release,
-            ]
-        );
-
-        $user = $app->getUser()->getIdentity();
-        SentrySdk\configureScope(function (Scope $scope) use ($app, $info, $settings, $user) {
-            if ($user && !$settings->anonymous) {
-                $scope->setUser([
-                    'id' => $user->email,
-                    'Username' => $user->username,
-                    'Email' => $user->email,
-                    'Admin' => $user->admin ? 'Yes' : 'No',
-                ]);
-            }
-
-            $scope->setExtra('App Type', 'Craft CMS');
-            $scope->setExtra('App Name', $info->name);
-            $scope->setExtra('App Edition', $app->getEditionName());
-            $scope->setExtra('App Version', $info->version);
-            $scope->setExtra('App Version (schema)', $info->schemaVersion);
-            $scope->setExtra('PHP Version', phpversion());
-            $scope->setExtra('URL', $app->getRequest()->isSiteRequest ? $app->getRequest()->getUrl() : "Console");
-        });
-    }
 }
