@@ -43,7 +43,7 @@ class SentryService extends Component
     {
         $app = Craft::$app;
         $info = $app->getInfo();
-        $settings = $this->getSettings();
+        $settings = Sentry::getInstance()->getSettings();
 
         SentrySdk\init([
                 'dsn' => $settings->clientDsn,
