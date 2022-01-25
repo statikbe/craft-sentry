@@ -6,10 +6,17 @@ use Craft;
 use craft\base\Component;
 use Sentry as SentrySdk;
 use Sentry\State\Scope;
+use statikbe\sentry\events\DefineSentrySdkConfigurationEvent;
 use statikbe\sentry\Sentry;
 
 class SentryService extends Component
 {
+    /**
+     * @event DefineSentrySdkConfigurationEvent The event that is triggered when defining the sentry SDK configuration.
+     * @since 3.6.5
+     */
+    const EVENT_DEFINE_SENTRY_SDK_CONFIGURATION = 'defineSentrySdkConfiguration';
+
     public function handleException($exception)
     {
         $plugin = Sentry::$plugin;
@@ -43,18 +50,14 @@ class SentryService extends Component
     {
         $app = Craft::$app;
         $info = $app->getInfo();
-        $settings = Sentry::getInstance()->getSettings();
 
-        SentrySdk\init([
-                'dsn' => $settings->clientDsn,
-                'environment' => CRAFT_ENVIRONMENT,
-                'release' => $settings->release,
-            ]
-        );
+        SentrySdk\init($this->getSentryInitOptions());
 
 
         $user = $app->getUser()->getIdentity();
-        SentrySdk\configureScope(function (Scope $scope) use ($app, $info, $settings, $user) {
+        SentrySdk\configureScope(function (Scope $scope) use ($app, $info, $user) {
+            $settings = Sentry::getInstance()->getSettings();
+
             if ($user && !$settings->anonymous) {
                 $scope->setUser([
                     'id' => $user->email,
@@ -72,5 +75,21 @@ class SentryService extends Component
             $scope->setExtra('PHP Version', phpversion());
             $scope->setExtra('URL', $app->getRequest()->isSiteRequest ? $app->getRequest()->getUrl() : "Console");
         });
+    }
+
+    protected function getSentryInitOptions()
+    {
+        $settings = Sentry::getInstance()->getSettings();
+
+        $event = new DefineSentrySdkConfigurationEvent([
+            'options' => [
+                'dsn'         => $settings->clientDsn,
+                'environment' => CRAFT_ENVIRONMENT,
+                'release'     => $settings->release,
+            ],
+        ]);
+        $this->trigger(self::EVENT_DEFINE_SENTRY_SDK_CONFIGURATION, $event);
+
+        return $event->options;
     }
 }
