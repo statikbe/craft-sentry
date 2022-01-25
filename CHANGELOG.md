@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - Add the ability to pass custom options to the Sentry SDK by listening to the 
   `SentryService::EVENT_DEFINE_SENTRY_SDK_CONFIGURATION` event
+- Honor the Craft [`httpProxy` general setting](https://craftcms.com/docs/3.x/config/config-settings.html#httpproxy)
 
 ## 1.0.3 - 2020-10-29
 ### Fixed
