@@ -46,6 +46,11 @@ class Sentry extends Plugin
         parent::init();
         self::$plugin = $this;
 
+        $request = Craft::$app->getRequest();
+        if ($request->getIsConsoleRequest()) {
+            $this->controllerNamespace = 'statikbe\sentry\console\controllers';
+        }
+
         $this->components = [
             'sentry' => SentryService::class
         ];
