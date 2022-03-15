@@ -8,6 +8,7 @@ use Sentry as SentrySdk;
 use Sentry\State\Scope;
 use statikbe\sentry\events\DefineSentrySdkConfigurationEvent;
 use statikbe\sentry\Sentry;
+use Twig\Error\RuntimeError;
 
 class SentryService extends Component
 {
@@ -23,7 +24,7 @@ class SentryService extends Component
         $settings = $plugin->getSettings();
 
         // If this is a Twig Runtime exception, use the previous one instead
-        if ($exception instanceof \Twig_Error_Runtime && ($previousException = $exception->getPrevious()) !== null) {
+        if ($exception instanceof RuntimeError && ($previousException = $exception->getPrevious()) !== null) {
             $exception = $previousException;
         }
 
@@ -68,7 +69,7 @@ class SentryService extends Component
             }
 
             $scope->setExtra('App Type', 'Craft CMS');
-            $scope->setExtra('App Name', $info->name);
+            $scope->setExtra('App Name', $app->getSystemName());
             $scope->setExtra('App Edition', $app->getEditionName());
             $scope->setExtra('App Version', $info->version);
             $scope->setExtra('App Version (schema)', $info->schemaVersion);

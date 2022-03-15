@@ -12,7 +12,7 @@ class Settings extends Model
     public $excludedCodes = ['400', '404'];
     public $release;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['enabled', 'anonymous'], 'boolean'],
