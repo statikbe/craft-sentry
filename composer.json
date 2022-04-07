@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "craftcms/cms": "4.0.0-beta.1",
+        "craftcms/cms": "^4.0.0-beta.1",
         "sentry/sdk": "^3.0.0"
     },
     "autoload": {
