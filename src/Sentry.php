@@ -11,6 +11,7 @@
 namespace statikbe\sentry;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\events\ExceptionEvent;
 use craft\web\ErrorHandler;
@@ -75,7 +76,7 @@ class Sentry extends Plugin
 
     // Protected Methods
     // =========================================================================
-    protected function createSettingsModel()
+    protected function createSettingsModel(): Model
     {
         return new Settings();
     }
