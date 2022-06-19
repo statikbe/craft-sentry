@@ -16,5 +16,6 @@ class TestController extends Controller
         } catch (Exception $e) {
             Sentry::handleException($e);
         }
+        return true;
     }
 }
