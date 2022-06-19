@@ -2,7 +2,7 @@
     "name": "statikbe/craft-sentry",
     "description": "Sentry.io integration for Craft CMS",
     "type": "craft-plugin",
-    "version": "2.0.0-beta.1",
+    "version": "2.0.0",
     "keywords": [
         "craft",
         "sentry",
