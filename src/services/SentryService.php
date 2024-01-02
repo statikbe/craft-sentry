@@ -16,7 +16,7 @@ class SentryService extends Component
      * @event DefineSentrySdkConfigurationEvent The event that is triggered when defining the sentry SDK configuration.
      * @since 3.6.5
      */
-    const EVENT_DEFINE_SENTRY_SDK_CONFIGURATION = 'defineSentrySdkConfiguration';
+    public const EVENT_DEFINE_SENTRY_SDK_CONFIGURATION = 'defineSentrySdkConfiguration';
 
     public function handleException($exception)
     {
