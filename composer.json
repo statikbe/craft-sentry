@@ -49,5 +49,11 @@
         "documentationUrl": "https://github.com/statikbe/craft-sentry/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/statikbe/craft-sentry/master/CHANGELOG.md",
         "class": "statikbe\\sentry\\Sentry"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
     }
 }
