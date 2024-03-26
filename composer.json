@@ -2,7 +2,7 @@
     "name": "statikbe/craft-sentry",
     "description": "Sentry.io integration for Craft CMS",
     "type": "craft-plugin",
-    "version": "5.0.0-alpha.1",
+    "version": "5.0.0",
     "keywords": [
         "craft",
         "sentry",
@@ -23,8 +23,18 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^5.0.0-alpha.1",
+        "craftcms/cms": "^5.0.0-beta.1",
         "sentry/sdk": "^4.0.0"
+    },
+    "require-dev": {
+        "craftcms/ecs": "dev-main",
+        "craftcms/phpstan": "dev-main"
+    },
+    "scripts": {
+        "check-cs": "ecs check --ansi",
+        "fix-cs": "ecs check --ansi --fix",
+        "phpstan": "phpstan --memory-limit=1G",
+        "ci": "ecs check --ansi --fix && phpstan --memory-limit=1G"
     },
     "autoload": {
         "psr-4": {
@@ -39,5 +49,11 @@
         "documentationUrl": "https://github.com/statikbe/craft-sentry/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/statikbe/craft-sentry/master/CHANGELOG.md",
         "class": "statikbe\\sentry\\Sentry"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
     }
 }

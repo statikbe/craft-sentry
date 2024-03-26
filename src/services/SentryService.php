@@ -39,12 +39,11 @@ class SentryService extends Component
         $this->setupSentry();
 
         Craft::info('Send exception to Sentry.', $plugin->handle);
-        SentrySdk\configureScope(function (SentrySdk\State\Scope $scope) use ($statusCode) {
+        SentrySdk\configureScope(function(SentrySdk\State\Scope $scope) use ($statusCode) {
             $scope->setExtra('Status Code', $statusCode);
         });
 
         $status = SentrySdk\captureException($exception);
-
     }
 
     private function setupSentry()
@@ -56,7 +55,7 @@ class SentryService extends Component
 
 
         $user = $app->getUser()->getIdentity();
-        SentrySdk\configureScope(function (Scope $scope) use ($app, $info, $user) {
+        SentrySdk\configureScope(function(Scope $scope) use ($app, $info, $user) {
             $settings = Sentry::getInstance()->getSettings();
 
             if ($user && !$settings->anonymous) {
@@ -84,10 +83,10 @@ class SentryService extends Component
 
         $event = new DefineSentrySdkConfigurationEvent([
             'options' => [
-                'dsn'         => $settings->clientDsn,
+                'dsn' => $settings->clientDsn,
                 'environment' => \craft\helpers\App::env('ENVIRONMENT'),
-                'release'     => $settings->release,
-                'http_proxy'  => \Craft::$app->config->general->httpProxy,
+                'release' => $settings->release,
+                'http_proxy' => \Craft::$app->config->general->httpProxy,
             ],
         ]);
         $this->trigger(self::EVENT_DEFINE_SENTRY_SDK_CONFIGURATION, $event);
