@@ -10,6 +10,7 @@ class Settings extends Model
     public $anonymous = true;
     public $clientDsn;
     public $excludedCodes = ['400', '404'];
+    public $excludedExceptions = [];
     public $release;
 
     public function rules(): array
@@ -17,6 +18,7 @@ class Settings extends Model
         return [
             [['enabled', 'anonymous'], 'boolean'],
             [['clientDsn', 'excludedCodes', 'release'], 'string'],
+            [['excludedExceptions'], 'array'],
             [['clientDsn'], 'required'],
         ];
     }

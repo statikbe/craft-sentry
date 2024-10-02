@@ -27,5 +27,6 @@ return [
     'anonymous'     => true,
     'clientDsn'     => getenv('SENTRY_DSN') ?: 'https://example@sentry.io/123456789',
     'excludedCodes' => ['400', '404', '429'],
+    'excludedExceptions' => [],
     'release'       => getenv('SENTRY_RELEASE') ?: null,
 ];
