@@ -54,22 +54,26 @@ class Sentry extends Plugin
             'sentry' => SentryService::class,
         ];
 
-        Event::on(
-            ErrorHandler::className(),
-            ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
-            function(ExceptionEvent $event) {
-                if ($this->getSettings()->enabled) {
-                    $this->sentry->handleException($event->exception);
+        Craft::$app->onInit(function () {
+            Event::on(
+                ErrorHandler::className(),
+                ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
+                function (ExceptionEvent $event) {
+                    if ($this->getSettings()->enabled) {
+                        $this->sentry->handleException($event->exception);
+                    }
                 }
-            }
-        );
+            );
+        });
     }
 
     // Static Methods
     // =========================================================================
     public static function handleException($exception)
     {
-        Sentry::$plugin->sentry->handleException($exception);
+        if (self::$plugin->getSettings()->enabled) {
+            self::$plugin->sentry->handleException($exception);
+        }
     }
 
     // Protected Methods
