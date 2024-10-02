@@ -56,7 +56,7 @@ class Sentry extends Plugin
             'sentry' => SentryService::class
         ];
 
-        if (Craft::$app->onInit(function () {
+        Craft::$app->onInit(function () {
             Event::on(
                 ErrorHandler::className(),
                 ErrorHandler::EVENT_BEFORE_HANDLE_EXCEPTION,
@@ -66,7 +66,7 @@ class Sentry extends Plugin
                     }
                 }
             );
-        }));
+        });
     }
 
     // Static Methods
