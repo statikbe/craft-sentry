@@ -1,4 +1,4 @@
-# Sentry.io for Craft CMS 3.x
+# Sentry.io for Craft CMS
 
 [Sentry.io](https://sentry.io/) integration for Craft CMS. Inspired by [born05/craft-sentry](https://github.com/born05/craft-sentry), but with our own twist.
 
@@ -21,6 +21,7 @@ return [
     'anonymous'     => true,
     'clientDsn'     => getenv('SENTRY_DSN') ?: 'https://example@sentry.io/123456789',
     'excludedCodes' => ['400', '404', '429'],
+    'excludedExceptions' => [],
     'release'       => getenv('SENTRY_RELEASE') ?: null,
 ];
 ```
@@ -44,6 +45,14 @@ try {
 ```
 
 The plugin works for exceptions thrown in web requests as well as console requests. For web requests, the url where the error happened is included.
+
+### Excluding specific exceptions
+Using the ``excludedExceptions``, you can stop specific types of exceptions from being logged to Sentry, for example:
+````php
+'excludedExceptions' => [
+    \craft\errors\ImageTransformException::class,
+],
+````
 
 ---
  

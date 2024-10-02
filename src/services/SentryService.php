@@ -36,6 +36,11 @@ class SentryService extends Component
             return;
         }
 
+        if(in_array(get_class($exception), $settings->excludedExceptions)) {
+            Craft::info('Exception class excluded from being reported to Sentry.', $plugin->handle);
+            return;
+        }
+
         $this->setupSentry();
 
         Craft::info('Send exception to Sentry.', $plugin->handle);
