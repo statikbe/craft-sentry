@@ -4,13 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## 5.1.1 - 2025-08-05
+## 5.1.2 - 2025-08-05
 ### Fixed
 - Use a safer way to determine Craft's environment ([#9](https://github.com/statikbe/craft-sentry/issues/9))
 
-## 5.1.0 - 2024-10-02
+## 5.1.1 - 2024-03-26
+### Fixed
+- Fix missing property exluded exceptions
+
+## 5.1.0 - 2024-03-26
 ### Added
-- Added support for excluding specific exceptions from being sent to Sentry.
+- Add excluded exceptions
+
 
 ## 5.0.0 - 2024-03-26
 ### Added
@@ -34,7 +39,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## 1.1.0 - 2022-03-14
 ### Added
-- Add the ability to pass custom options to the Sentry SDK by listening to the 
+- Add the ability to pass custom options to the Sentry SDK by listening to the
   `SentryService::EVENT_DEFINE_SENTRY_SDK_CONFIGURATION` event
 - Honor the Craft [`httpProxy` general setting](https://craftcms.com/docs/3.x/config/config-settings.html#httpproxy)
 - Added console function to send a test exception
