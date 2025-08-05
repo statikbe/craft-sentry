@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 5.1.2 - 2025-08-05
+### Fixed
+- Use a safer way to determine Craft's environment ([#9](https://github.com/statikbe/craft-sentry/issues/9))
+
 ## 5.1.1 - 2024-03-26
 ### Fixed
 - Fix missing property exluded exceptions
@@ -11,6 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 5.1.0 - 2024-03-26
 ### Added
 - Add excluded exceptions
+
 
 ## 5.0.0 - 2024-03-26
 ### Added
