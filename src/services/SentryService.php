@@ -89,7 +89,7 @@ class SentryService extends Component
         $event = new DefineSentrySdkConfigurationEvent([
             'options' => [
                 'dsn' => $settings->clientDsn,
-                'environment' => \craft\helpers\App::env('ENVIRONMENT'),
+                'environment' => Craft::$app->env,
                 'release' => $settings->release,
                 'http_proxy' => \Craft::$app->config->general->httpProxy,
             ],
